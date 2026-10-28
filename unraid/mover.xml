@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>mover</Name>
+  <Repository>ghcr.io/trecoool/mover:latest</Repository>
+  <Registry>https://github.com/trecoool/mover/pkgs/container/mover</Registry>
+  <Network>none</Network>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/trecoool/mover/issues</Support>
+  <Project>https://github.com/trecoool/mover</Project>
+  <Overview>Watches source folders (inotify) and moves or copies finished downloads to a target: per file, leaf folder or top-level entry, after a debounce and an optional end-of-download marker. Atomic arrival, never overwrites. Configured in /config/mover.toml; manual run: docker exec mover mover run &lt;rule&gt;.</Overview>
+  <Category>Tools:</Category>
+  <WebUI/>
+  <ExtraParams/>
+  <PostArgs/>
+  <Config Name="Cache pool" Target="/mnt/cache" Default="/mnt/cache" Mode="rw" Description="Same path inside and out: rules use real disk paths" Type="Path" Display="always" Required="true" Mask="false">/mnt/cache</Config>
+  <Config Name="Other pool" Target="/mnt/pool" Default="/mnt/pool" Mode="rw" Description="Another disk or pool holding sources or targets, same path inside and out. Mount a target's parent so its temp sibling is reachable." Type="Path" Display="always" Required="false" Mask="false">/mnt/pool</Config>
+  <Config Name="Config" Target="/config" Default="/mnt/user/appdata/mover" Mode="rw" Description="mover.toml (example written on first start), copied.db, logs" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/mover</Config>
+  <Config Name="Armed" Target="ARMED" Default="0" Mode="" Description="0 = every rule only logs its plan. 1 = rules act (except those with dry_run = true)." Type="Variable" Display="always" Required="true" Mask="false">0</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="Owner of written files" Type="Variable" Display="advanced" Required="true" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Group of written files" Type="Variable" Display="advanced" Required="true" Mask="false">100</Config>
+</Container>

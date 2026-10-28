@@ -1,0 +1,17 @@
+# Copied to /config/mover.toml on first start. Restart the container after changes.
+# Paths are as seen in the container: mount host paths at the same place (/mnt/cache:/mnt/cache)
+# and use real disk paths, not /mnt/user (inotify misses writes made outside shfs, renames can't be checked).
+
+debounce = 60   # seconds between two signature checks; a unit moves when two consecutive ones match
+
+# [[rule]]
+# name = "downloads"
+# source = "/mnt/cache/downloads/complete"
+# target = "/mnt/cache/inbox"
+# unit = "top"            # top = each top-level entry | leaf = folders holding only files | file = each file
+# mode = "move"           # move | copy (copy remembers what it copied: `mover reset <rule>` to forget)
+# marker = ".done"        # unit waits until every file has this file in its folder or a parent; deleted on move
+# exclude = ["_incomplete"]   # names, any depth, fnmatch patterns
+# enabled = true          # false = only `mover run <rule>`
+# dry_run = false         # log the plan only (ARMED=0 does this for every rule)
+# temp = "/mnt/cache/inbox_movertemp"   # default: <target>_movertemp, must share the target's disk
